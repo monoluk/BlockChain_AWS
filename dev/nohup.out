@@ -1,0 +1,26 @@
+
+> blockchain@1.0.0 node_1 /home/ubuntu/Users/YELU/desktop/fstack/blockchainjsLu
+> nodemon --watch dev -e js dev/networkNode.js 3001 http://localhost:3001
+
+[33m[nodemon] 1.19.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: /home/ubuntu/Users/YELU/desktop/fstack/blockchainjsLu/dev/**/*[39m
+[32m[nodemon] starting `node dev/networkNode.js 3001 http://localhost:3001`[39m
+events.js:173
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+Emitted 'error' event at:
+    at internal/fs/streams.js:169:12
+    at FSReqCallback.wrapper [as oncomplete] (fs.js:484:5)
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! blockchain@1.0.0 node_1: `nodemon --watch dev -e js dev/networkNode.js 3001 http://localhost:3001`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the blockchain@1.0.0 node_1 script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/ubuntu/.npm/_logs/2019-05-03T20_51_50_679Z-debug.log

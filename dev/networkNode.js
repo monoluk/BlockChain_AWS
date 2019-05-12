@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const Blockchain = require('./blockchain');
 const uuid = require('uuid/v1');
-const port = process.argv[2];
+const port = process.argv[2] || 3001;
 const rp = require('request-promise');
 const checkAuth = require('./api/middleware/check-auth');
 

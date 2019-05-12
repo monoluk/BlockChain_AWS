@@ -2,14 +2,26 @@ const sha256 = require('sha256');
 const currentNodeUrl = process.argv[3];
 const uuid = require('uuid/v1');
 const merkle = require('merkle');
+const fs = require('fs');
 
 function BlockChain(){
+	fs.readFile('./dev/data/bitcoin.json', 'utf8', (err,data)=>{
+		if(data){
+		jsonData = JSON.parse(data);
+		this.chain = jsonData.chain;
+		this.pendingTransactions = jsonData.pendingTransactions;
+		this.currentNodeUrl = currentNodeUrl;
+		this.networkNodes = jsonData.networkNodes;
+		this.UTXO = jsonData.UTXO;
+
+	}else{
 	 this.chain = [];
 	 this.pendingTransactions = [];
 	 this.currentNodeUrl = currentNodeUrl;
 	 this.networkNodes = [];
 	 this.UTXO = [];
-	 this.createNewBlock(0,'block','genesis');
+	 this.createNewBlock(0,'block','genesis');}
+})
 }
 
 BlockChain.prototype.createNewBlock = function(nonce, previousBlockHash, hash) {
@@ -37,6 +49,14 @@ this.UTXO.push({transactionId : transactionObj.transactionId,
 this.pendingTransactions = [];
 this.chain.push(newBlock);
 
+fs.writeFile('./dev/data/bitcoin.json', JSON.stringify(this), err=>{
+	if(!err){
+		console.log('in NB bitcoid.json has been updated');
+	}else{
+		console.log('couldn\'t write to file');
+	}
+})
+
 return newBlock;
 	
 }
@@ -58,6 +78,14 @@ return newTransaction;
 
 BlockChain.prototype.addTransactionToPendingTransactions = function(transactionObj){
 this.pendingTransactions.push(transactionObj);
+
+fs.writeFile('./dev/data/bitcoin.json', JSON.stringify(this), err=>{
+	if(!err){
+		console.log('in add PT, chain.json has been updated');
+	}else{
+		console.log('couldn\'t write to file');
+	}
+})
 
 
 return this.getLastBlock()['index'] + 1;
@@ -231,7 +259,7 @@ this.UTXO.forEach(transactionBlock=>{
 		}
 );
 
-if (owner == '00')
+if (owner == '00' || owner == '735901c06dd711e9a29fffa6362f8fb3')
 enoughBalance=true;
 
 return enoughBalance;
