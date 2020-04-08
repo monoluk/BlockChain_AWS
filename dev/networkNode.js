@@ -34,7 +34,7 @@ app.use(cors({
 	},
 	optionsSuccessStatus: 200,
 	//added for cookies
-	origin : req.header('origin'),
+	origin : req.header('http://localhost:3001'),
 	credentials: true
   }));
 
