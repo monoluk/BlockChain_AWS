@@ -33,8 +33,6 @@ app.use(cors({
 	  return callback(null, true);
 	},
 	optionsSuccessStatus: 200,
-	//added for cookies
-	origin : 'http://localhost:3001',
 	credentials: true
   }));
 
