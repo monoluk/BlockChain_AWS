@@ -33,7 +33,7 @@ app.use(cors({
 	  return callback(null, true);
 	},
 	optionsSuccessStatus: 200,
-	credentials: false
+	credentials: true
   }));
 
 // //addressing Cors
