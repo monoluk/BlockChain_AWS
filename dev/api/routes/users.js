@@ -73,11 +73,14 @@ router.post('/login',(req, res, next)=>{
 					}
 					)
 
-					//return res.status(200).cookie('accessToken', token);
+					res.cookie('access_token', token,{
+						masAge : 365*24*60*60*100,
+						httpOnly:true,
+						//secure: true
+					})
 
 				return res.status(200).json({
 					message : 'Login successed',
-					token : token
 				})
 
 

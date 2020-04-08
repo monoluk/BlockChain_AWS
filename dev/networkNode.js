@@ -7,6 +7,7 @@ const uuid = require('uuid/v1');
 const port = process.argv[2] || 3001;
 const rp = require('request-promise');
 const checkAuth = require('./api/middleware/check-auth');
+const cors = require('cors');
 
 const nodeAddress = uuid().split('-').join('');
 const bitcoin = new Blockchain();
@@ -26,19 +27,29 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+//origin from everywhere with cookies
+app.use(cors({
+	origin: function(origin, callback){
+	  return callback(null, true);
+	},
+	optionsSuccessStatus: 200,
+	//added for cookies
+	origin : req.header('origin'),
+	credentials: true
+  }));
 
-//addressing Cors
-app.use((req,res,next)=>{
-	res.header("Access-Control-Allow-Origin", '*');
-	res.header("Access-Control-Allow-Headers", 
-				"Origin, X-Requested-With, Content-Type, Accept, Authorization");
-	res.header('Access-Control-Allow-Credentials', true);
-	if(req.method === 'OPTIONS'){
-		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-		return res.status(200).json({});
-	}
-	next();
-});
+// //addressing Cors
+// app.use((req,res,next)=>{
+// 	res.header("Access-Control-Allow-Origin", '*');
+// 	res.header("Access-Control-Allow-Headers", 
+// 				"Origin, X-Requested-With, Content-Type, Accept, Authorization");
+// 	res.header('Access-Control-Allow-Credentials', true);
+// 	if(req.method === 'OPTIONS'){
+// 		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+// 		return res.status(200).json({});
+// 	}
+// 	next();
+// });
 
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
