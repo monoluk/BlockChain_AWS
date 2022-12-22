@@ -24,7 +24,7 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "forever": "^1.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "merkle": "^0.6.0",
     "merkle-tools": "^1.4.0",
     "mongoose": "^5.5.4",
